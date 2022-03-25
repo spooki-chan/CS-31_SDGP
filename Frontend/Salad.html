@@ -1,0 +1,325 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Drag and drop shopping cart with jQuery UI</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="jquery-ui-1.9.0.custom.min.js"></script>
+    <style>
+        body{
+            background-image: linear-gradient(180deg,#99781f , #a39337,#c5bd74);
+        }
+       
+        .topnav {
+  overflow: hidden;
+  background-color:none;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: burlywood;
+}
+
+.topnav a.active {
+  background-color: rgb(247, 140, 0);
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+.logo{width: 30px;
+height: 30px;}
+
+.text-input{
+    width: 500px;
+    height: 35px;
+    margin: 10px;
+   
+}
+button{
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #d4b257;
+    color: white;
+    border-color: burlywood;
+}
+    </style>
+</head>
+
+<body>
+    <nav class="topnav" id="myTopnav">
+        <a href="Presentation Page.html" ><img src="assets/hexagon.png" class="logo"></a>
+        <a href="Home page.html">Home</a>
+        <a href="Appetizer & Snack Recipes.html">Recipes</a>
+        <a href="">Sign Up</a>
+        <a href="">Login</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+        <form id="live-search" method="post">
+        
+            <input type="text" class="text-input" id="filter" placeholder="search..."/>
+            <span id="filter-count"></span>
+        
+    </form>
+      </nav>
+    
+
+    <br />
+    <br />
+    &nbsp; &nbsp;  &nbsp; <a href="Appetizer & Snack Recipes.html"><button>Appertizer and Snack</button></a> &nbsp; <a href="Lunch.html"><button>Lunch</button></a>    &nbsp; <a href="Dinner.html"><button>Dinner</button></a>   &nbsp; <a href="Salad.html"><button>Salad</button></a>  &nbsp; <a href="Soup.html"><button>Soup</button></a> 
+    <div class="container">
+
+        <section id="product">
+            <ul class="clear">
+                <div class="item #3    Category-Raw Mustard Greens salad With Gruyre And Anchovy Croutons - Salad. ">
+                    <li data-id="1">
+                        
+                            <a href = "Raw Mustard Greens salad With Gruyre And Anchovy Croutons.html"> <img class = "hover-shadow cursor" id = "Raw Mustard Greens salad With Gruyre And Anchovy Croutons" src = "./img/30-556x370.jpg" alt = "Raw Mustard Greens Salad With GruyÃ¨re And Anchovy Croutons" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3>  Raw Mustard Greens salad With Gruyre And Anchovy Croutons - Salad. </h3>
+
+							</a>
+                    </li>
+                </div>
+                <div class="item #3 The Perfect Caesar Salad - Salad. ">
+                    <li data-id="2">
+                        
+                            <a href = "The Perfect Caesar Salad.html"> <img class = "hover-shadow cursor" id = "The Perfect Caesar Salad" src = "./img/102-556x370.jpg" alt = "The Perfect Caesar Salad" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> The Perfect Caesar Salad - Salad. </h3>
+
+							</a>
+                    </li>
+                </div>
+                <div class="item #3  Tart Green Salad with Avocado Dressing - Salad.   ">
+                    <li data-id="3">
+                        
+                            <a href = "Tart Green Salad with Avocado Dressing.html"> <img class = "hover-shadow cursor" id = "Tart Green Salad with Avocado Dressing" src = "./img/123-556x370.jpg" alt = "Tart Green Salad with Avocado Dressing" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Tart Green Salad with Avocado Dressing - Salad.  </h3>
+
+							</a>
+                    </li>
+                </div>
+                <div class="item #3 Farro & Tomato Salad With Basil & Anchovies - Salad.">
+                    <li data-id="4">
+                        
+                            <a href = "Farro & Tomato Salad With Basil & Anchovies.html"> <img class = "hover-shadow cursor" id = "Farro & Tomato Salad With Basil & Anchovies" src = "./img/125-556x370.jpg" alt = "Farro & Tomato Salad With Basil & Anchovies" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Farro & Tomato Salad With Basil & Anchovies - Salad. </h3>
+                            
+							</a>
+                    </li>
+                </div>
+                <div class="item #3 Caesar Salad Deviled Eggs - Salad. ">
+                    <li data-id="5">
+                        
+                            <a href = "Caesar Salad Deviled Eggs.html"> <img class = "hover-shadow cursor" id = "Caesar Salad Deviled Eggs" src = "./img/199-556x370.jpg" alt = "Caesar Salad Deviled Eggs" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Caesar Salad Deviled Eggs - Salad. </h3>
+                            
+							</a>
+                    </li>
+                </div>
+                <div class="item #3 Radish Salad Lugano - Salad.">
+                    <li data-id="4">
+                        
+                            <a href = "Radish Salad Lugano.html"> <img class = "hover-shadow cursor" id = "Radish Salad Lugano" src = "./img/33-556x370.jpg" alt = "Radish Salad Lugano" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Radish Salad Lugano - Salad. </h3>
+                            
+							</a>
+                    </li>
+                </div>
+               
+                <div class="item #3 Fried Anchovies - Snack, Appetize.">
+                    <li data-id="4">
+                       
+                            <a href = "Fried Anchovies.html"> <img class = "hover-shadow cursor" id = "Fried Anchovies" src = "./img/6-556x370.jpg" alt = "Fried Anchovies" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Fried Anchovies - Snack, Appetize. </h3>
+                            
+							</a>
+                    </li>
+                </div>
+               
+                <div class="item #3  Radish Salad With Anchovy Sauce - Salad. ">
+                    <li data-id="4">
+                        
+                            <a href = "Radish Salad With Anchovy Sauce.html"> <img class = "hover-shadow cursor" id = "Radish Salad With Anchovy Sauce" src = "./img/39-556x370.jpg" alt = "Radish Salad With Anchovy Sauce" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Radish Salad With Anchovy Sauce - Salad. </h3>
+                            
+							</a>
+                    </li>
+                </div>
+                <div class="item #3 Tomato-and-Anchovy Salad with Garlic Cream - Salad.">
+                    <li data-id="4">
+                        
+                            <a href = "Tomato-and-Anchovy Salad with Garlic Cream.html"> <img class = "hover-shadow cursor" id = "Tomato-and-Anchovy Salad with Garlic Cream" src = "./img/56-556x370.jpg" alt = "Tomato-and-Anchovy Salad with Garlic Cream" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Tomato-and-Anchovy Salad with Garlic Cream - Salad. </h3>
+                            
+							</a>
+                    </li>
+                </div>
+
+                <div class="item #3 Egg-Free Avocado Caesar Salad - Salad.">
+                    <li data-id="4">
+                        
+                            <a href = "Egg-Free Avocado Caesar Salad.html"> <img class = "hover-shadow cursor" id = "Egg-Free Avocado Caesar Salad" src = "./img/62-556x370.jpg" alt = "Egg-Free Avocado Caesar Salad" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Egg-Free Avocado Caesar Salad - Salad. </h3>
+                            
+							</a>
+                    </li>
+                </div>
+                <div class="item #3  Greek Salad Skewers with Anchovy Aioli - Salad. ">
+                    <li data-id="4">
+                        
+                            <a href = "Greek Salad Skewers with Anchovy Aioli.html"> <img class = "hover-shadow cursor" id = "Greek Salad Skewers with Anchovy Aioli" src = "./img/67-556x370.jpg" alt = "Greek Salad Skewers with Anchovy Aioli" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Greek Salad Skewers with Anchovy Aioli - Salad. .</h3>
+                            
+							</a>
+                    </li>
+                </div>
+                <div class="item #3 Salad with Parmigiano-Reggiano and anchovy dressing - Salad.">
+                    <li data-id="4">
+                       
+                            <a href = "Salad with Parmigiano-Reggiano and anchovy dressing.html"> <img class = "hover-shadow cursor" id = "Salad with Parmigiano-Reggiano and anchovy dressing" src = "./img/69-556x370.jpg" alt = "Salad with Parmigiano-Reggiano and anchovy dressing" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Salad with Parmigiano-Reggiano and anchovy dressing - Salad. </h3>
+                            
+							</a>
+                    </li>
+                </div>
+                <div class="item #3 Chicken Caesar Salad - Salad. ">
+                    <li data-id="4">
+                        
+                            <a href = "Chicken Caesar Salad.html"> <img class = "hover-shadow cursor" id = "Chicken Caesar Salad" src = "./img/72-556x370.jpg" alt = "Chicken Caesar Salad" width = "250" height = "190" onmouseover = "showWideAreaImage(this);" onclick = "navigateToMainImg();">
+                            <h3> Chicken Caesar Salad - Salad.  </h3>
+                            
+							</a>
+                    </li>
+                </div>
+             
+
+            </ul>
+        </section>
+
+        <script>
+            $(function () {
+    
+                // jQuery UI Draggable
+                $("#product li").draggable({
+    
+                    // brings the item back to its place when dragging is over
+                    revert: true,
+    
+                    // once the dragging starts, we decrease the opactiy of other items
+                    // Appending a class as we do that with CSS
+                    drag: function () {
+                        $(this).addClass("active");
+                        $(this).closest("#product").addClass("active");
+                    },
+    
+                    // removing the CSS classes once dragging is over.
+                    stop: function () {
+                        $(this).removeClass("active").closest("#product").removeClass("active");
+                    }
+                });
+    
+                // jQuery Ui Droppable
+                $(".basket").droppable({
+    
+                    // The class that will be appended to the to-be-dropped-element (basket)
+                    activeClass: "active",
+    
+                    // The class that will be appended once we are hovering the to-be-dropped-element (basket)
+                    hoverClass: "hover",
+    
+                    // The acceptance of the item once it touches the to-be-dropped-element basket
+                    // For different values http://api.jqueryui.com/droppable/#option-tolerance
+                    tolerance: "touch",
+                    drop: function (event, ui) {
+    
+                        var basket = $(this),
+                            move = ui.draggable,
+                            itemId = basket.find("ul li[data-id='" + move.attr("data-id") + "']");
+    
+                        // To increase the value by +1 if the same item is already in the basket
+                        if (itemId.html() != null) {
+                            itemId.find("input").val(parseInt(itemId.find("input").val()) + 1);
+                        }
+                        else {
+                            // Add the dragged item to the basket
+                            addBasket(basket, move);
+    
+                            // Updating the quantity by +1" rather than adding it to the basket
+                            move.find("input").val(parseInt(move.find("input").val()) + 1);
+                        }
+                    }
+                });
+    
+                // This function runs onc ean item is added to the basket
+                function addBasket(basket, move) {
+                    basket.find("ul").append('<li data-id="' + move.attr("data-id") + '">'
+                        + '<span class="name">' + move.find("h3").html() + '</span>'
+                        
+                        + '<button class="delete">&#10005;</button>');
+                }
+    
+    
+                // The function that is triggered once delete button is pressed
+                $(".basket ul li button.delete").live("click", function () {
+                    $(this).closest("li").remove();
+                });
+    
+            });
+    
+            $(document).ready(function () {
+                var images = $(".item") //contain all unfiltered images
+                $("#filter").on("change paste keyup", function () {
+                    $.each(images, function (i, l) {
+                        $(l).hide();
+                    }); //hide all images
+                    searchValue = $("#filter").val(); //get entered value of input field
+                    searchValueRE = new RegExp(searchValue, "i"); //convert search value into RegExp
+                    output = $.grep(images, function (n) { return searchValueRE.test(n.className); }); //Returns array that matches input value
+                    $.each(output, function (i, l) {
+                        $(l).show();
+                    }); //show matched images
+                });
+            });
+        </script>
+    
+
+</body>
+
+</html>
