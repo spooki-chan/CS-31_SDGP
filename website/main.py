@@ -21,7 +21,7 @@ def hybrid(userId,title):
 
 print(hybrid(2,"Pissaladiere"))
 # deploy it in the flask
-# Make the froentend
+# Make the frontend
 # show users their recommendation
 
 
