@@ -9,7 +9,14 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 import os
 
 
+import pickle
+from pyexpat import model
+from sys import api_version
+from this import d
 
+cosine_sim = pickle.load(open('./cosine_sim.pickle','rb'))
+df = pickle.load(open('df.pickle','rb'))
+svd = pickle.load(open('svd.pickle', 'rb'))
 
 
 app = Flask(__name__)
@@ -85,7 +92,7 @@ def signup():
 
     return render_template('signup.html', form=form)
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
     return render_template('dashboard.html', name=current_user.username)
@@ -95,6 +102,24 @@ def dashboard():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+@app.route('/hybrid', methods=['GET', 'POST'])
+def hybrid(userId,title):
+    idx = df[df.title==title].index.values[0]
+    tfdbId = df[df.title==title]['tfdbId'].values[0]
+    recipe_id = df[df.title==title]['recipeId'].values[0]
+    sim_scores = list(enumerate(cosine_sim[int(idx)]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    sim_scores = sim_scores[1:26]
+    recipe_indices = [i[0] for i in sim_scores]
+    recipes = df.iloc[recipe_indices][['title','ingredients','id','recipeId','image']]
+
+    recipes['est'] = recipes['recipeId'].apply(lambda x: svd.predict(userId, x).est)
+
+    recipes = recipes.sort_values('est', ascending=False)
+    return recipes.head(10)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
