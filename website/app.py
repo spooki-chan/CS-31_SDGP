@@ -95,7 +95,7 @@ def signup():
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
-    return render_template('Search Page.html', name=current_user.username)
+    return render_template('dashboard.html', name=current_user.username)
 
 @app.route('/logout')
 @login_required
