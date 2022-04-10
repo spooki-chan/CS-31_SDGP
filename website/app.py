@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for,request,jsonify
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField
@@ -7,6 +7,7 @@ from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import os
+import json
 
 
 import pickle
@@ -104,8 +105,10 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/hybrid', methods=['GET', 'POST'])
-def hybrid(userId,title):
+@app.route('/hybrid', methods=['GET'])
+def with_parameters():
+    title = request.args.get('title')
+    userId = int(request.args.get('userId'))
     idx = df[df.title==title].index.values[0]
     tfdbId = df[df.title==title]['tfdbId'].values[0]
     recipe_id = df[df.title==title]['recipeId'].values[0]
@@ -113,12 +116,31 @@ def hybrid(userId,title):
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:26]
     recipe_indices = [i[0] for i in sim_scores]
-    recipes = df.iloc[recipe_indices][['title','ingredients','id','recipeId','image']]
+    result = df.to_json(orient="records")
+    parsed = json.loads(result)
+    return json.dumps(parsed, indent=4)
+    
+    # recipes = df.iloc[recipe_indices][['title','ingredients','id','recipeId','image']]
 
-    recipes['est'] = recipes['recipeId'].apply(lambda x: svd.predict(userId, x).est)
+    # recipes['est'] = recipes['recipeId'].apply(lambda x: svd.predict(userId, x).est)
 
-    recipes = recipes.sort_values('est', ascending=False)
-    return recipes.head(10)
+    # recipes = recipes.sort_values('est', ascending=False)
+    # return jsonify(recipes.head(10)) 
+   
+   
+    # return jsonify(message="My name is " + title + " and I am " + str(userId) + " years old")
+
+# def hybrid(userId,title):
+    # title = request.args.get('title')
+    # userId = int(request.args.get('userId'))
+    # return jsonify(message="My name is " + userId + " and I am " + title + " years old")
+    
+
+# @app.route('/parameters', methods=['GET'])
+# def with_parameters():
+#     name = request.args.get('name')
+#     age = int(request.args.get('age'))
+#     return jsonify(message="My name is " + name + " and I am " + str(age) + " years old")
 
 
 if __name__ == '__main__':
