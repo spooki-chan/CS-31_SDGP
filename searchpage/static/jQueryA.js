@@ -44,7 +44,7 @@ $(function() {
 				 {
 					 {
 						 {
-							 output+="<h2><li>" + data.recipes[i].name +"</li></h2>" + "<img src=" + data.recipes[i].picture + ">"+"<p>"+ data.recipes[i].description + "</p>" + "<button><a href='" + data.recipes[i].url + "'>Visit Page</a></button><hr>";
+							 output+="<h2><li>" + data.recipes[i].name +"</li></h2>" + "<img src=" + data.recipes[i].picture + ">"+"<p>"+ data.recipes[i].calorie + "</p>" + "<button class='addFavourites'>Add to Favourite</a></button><hr>";
 						 } } } } }
 			  output+="</ul>";
 			  document.getElementById( "Placeholder" ).innerHTML = output;
