@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for,request,jsonify
 from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm 
+from flask_wtf import FlaskForm
+from sympy import Q 
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy  import SQLAlchemy
@@ -106,7 +107,7 @@ def logout():
 
 
 @app.route('/hybrid', methods=['GET'])
-def with_parameters():
+def hybrid():
     title = request.args.get('title')
     userId = int(request.args.get('userId'))
     idx = df[df.title==title].index.values[0]
@@ -116,9 +117,11 @@ def with_parameters():
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:26]
     recipe_indices = [i[0] for i in sim_scores]
-    result = df.to_json(orient="records")
-    parsed = json.loads(result)
-    return json.dumps(parsed, indent=4)
+    temp_df = df.iloc[recipe_indices][['title','ingredients','id','recipeId','image']]
+    temp_df['est'] = temp_df['recipeId'].apply(lambda x: svd.predict(userId, x).est)
+    
+    temp_df = temp_df.sort_values('est',ascending=False)
+    return temp_df.head(10).to_json(orient='records')
     
     # recipes = df.iloc[recipe_indices][['title','ingredients','id','recipeId','image']]
 
@@ -126,7 +129,10 @@ def with_parameters():
 
     # recipes = recipes.sort_values('est', ascending=False)
     # return jsonify(recipes.head(10)) 
-   
+    # temp_df['est'] = temp_df['recipeId'].apply(lambda x: svd.predict(userId, x).est)
+ #   temp_df = temp_df.head(10)
+  #  result = temp_df.to_json(orient="records")
+   # parsed = json.loads(result)
    
     # return jsonify(message="My name is " + title + " and I am " + str(userId) + " years old")
 
@@ -135,12 +141,6 @@ def with_parameters():
     # userId = int(request.args.get('userId'))
     # return jsonify(message="My name is " + userId + " and I am " + title + " years old")
     
-
-# @app.route('/parameters', methods=['GET'])
-# def with_parameters():
-#     name = request.args.get('name')
-#     age = int(request.args.get('age'))
-#     return jsonify(message="My name is " + name + " and I am " + str(age) + " years old")
 
 
 if __name__ == '__main__':

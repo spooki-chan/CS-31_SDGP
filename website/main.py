@@ -25,7 +25,7 @@ def hybrid(userId,title):
 
    
 
-print(hybrid(2,"Roasted Peppers with Boquerones"))
+print(hybrid(2,"Oriental Style Peppers"))
 
 
 # deploy it in the flask
