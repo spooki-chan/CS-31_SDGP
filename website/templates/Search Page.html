@@ -231,36 +231,26 @@ body {
     text-align: left;
   }
 }
+.addFavourites{
+  background-color: #74ce5e;
+}
     
 </style>
 </head>
 
-{% block content %}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">DiaCooky</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">App</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </nav>
-
+<body>
+    <nav class="topnav" id="myTopnav">
+        <a href="" >logo</a>
+        <a href="">Home</a>
+        <a href="">Search</a>
+        <a href="">Sign Up</a>
+        <a href="">Login</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </nav>
+    
+<h1>Search For Your Recipe</h1>
 
 
 
@@ -306,10 +296,7 @@ body {
 
 
  <div id="Placeholder"></div>
-<div class="btn">
-    <button class="viewFavourites">View Favourites</button>
-    <button class="clearFavourites">Clear All</button>
-</div>
+
  
 
  <div id="Placeholder2"></div>
@@ -317,7 +304,7 @@ body {
 <script>
 
 var data = { 
-	"recipes": [
+  "recipes": [
   {
             "id":"1",
             "name":"Fried Anchovies with Sage",
@@ -325,7 +312,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/1-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"1.html",        },
 		{
             "id":"2",
             "name":"Anchovies Appetizer With Breadcrumbs & Scallions",
@@ -333,7 +320,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/2-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"2.html",        },
         {   
             "id":"3",
             "name":"Carrots, Cauliflower And Anchovies.",
@@ -341,7 +328,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/3-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"3.html",
         },
         {   
           "id":"4",
@@ -350,7 +337,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/4-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"4.html",
         },
         {   
           "id":"5",
@@ -359,7 +346,7 @@ var data = {
             "style":"breakfast",
             "picture":"https://spoonacular.com/recipeImages/5-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"5.html",
         },
         {   
           "id":"6",
@@ -368,7 +355,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/6-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"6.html",
         },
         {   
           "id":"7",
@@ -377,7 +364,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/7-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"7.html",        },
         {   
           "id":"8",
             "name":"Marinated Fresh Anchovies: Alici Marinate",
@@ -385,7 +372,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/9-556x370.jpeg",
             "description":"" ,
-            "url":"",        },
+            "url":"8.html",        },
         {   
           "id":"9",
             "name":"Marinated Boquerones",
@@ -393,7 +380,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/10-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"9.html",        },
         {   
           "id":"10",
             "name":"Spaghetti With Walnuts And Anchovies",
@@ -401,7 +388,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/11-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"10.html",        },
         {
             "id":"11",
             "name":"Roasted Peppers with Boquerones",
@@ -409,7 +396,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/12-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"11.html",        },
 		{
             "id":"12",
             "name":"Anchovies, Tomatoes And Green Beans Couscous",
@@ -417,7 +404,7 @@ var data = {
             "style":"breakfast",
             "picture":"https://spoonacular.com/recipeImages/13-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"12.html",
         },
         {   
             "id":"13",
@@ -426,7 +413,7 @@ var data = {
             "style":"breakfast",
             "picture":"https://spoonacular.com/recipeImages/16-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"13.html",
         },
         {   
           "id":"14",
@@ -435,7 +422,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/17-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"14.html",
         },
         {   
           "id":"15",
@@ -444,7 +431,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/18-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"15.html",
         },
         {   
           "id":"16",
@@ -453,7 +440,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/19-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"16.html",
         },
         {   
           "id":"17",
@@ -462,7 +449,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/20-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"17.html",
         },
         {   
           "id":"18",
@@ -471,7 +458,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/21-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"18.html",
         },
         {   
           "id":"19",
@@ -480,7 +467,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/22-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"19.html",
         },
         {   
           "id":"20",
@@ -489,7 +476,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/23-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"20.html",        },
         {
             "id":"21",
             "name":"Anchovy Fries with Smoked Paprika Aioli",
@@ -497,7 +484,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/25-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"21.html",        },
 		{
             "id":"22",
             "name":"Sliced Baguette With Radishes And Anchovy Butter",
@@ -505,7 +492,7 @@ var data = {
             "style":"breakfast",
             "picture":"https://spoonacular.com/recipeImages/26-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"22.html",        },
         {   
             "id":"23",
             "name":"Cook the Book: Braided Beef with Anchovies and Olives",
@@ -513,7 +500,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/27-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"23.html",        },
         {   
           "id":"24",
             "name":"Potato salad With Green Goddess Dressing.",
@@ -521,7 +508,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/28-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"24.html",        },
         {   
           "id":"25",
             "name":"Skate, Chicory, and Anchovy",
@@ -529,7 +516,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/29-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"25.html",        },
         {   
           "id":"26",
             "name":"Raw Mustard Greens salad With GruyÃ¨re And Anchovy Croutons",
@@ -537,7 +524,7 @@ var data = {
             "style":"breakfast",
             "picture":"https://spoonacular.com/recipeImages/30-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"26.html",        },
         {   
           "id":"27",
             "name":"Caramelized Onion And Fresh Anchovy Tart",
@@ -545,7 +532,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/31-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"27.html",        },
         {   
           "id":"28",
             "name":"Anchovy Crostini With Onion-and-raisin Relish",
@@ -553,7 +540,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/32-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"28.html",        },
         {   
           "id":"29",
             "name":"Radish salad Lugano",
@@ -561,7 +548,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/33-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"29.html",        },
         {   
           "id":"30",
             "name":"Cardoons With Anchovy-garlic side dish",
@@ -569,7 +556,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/34-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"30.html",        },
         {
             "id":"31",
             "name":"Anchovy and Herb Marinade",
@@ -577,7 +564,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/35-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"31.html",        },
 		{
             "id":"32",
             "name":"Beet Greens With Anchovies",
@@ -585,7 +572,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/36-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"32.html",        },
         {   
             "id":"33",
             "name":"Roasted Cauliflower With Anchovy Bread Crumbs",
@@ -593,7 +580,7 @@ var data = {
             "style":"breakfast",
             "picture":"https://spoonacular.com/recipeImages/37-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"33.html",        },
         {   
           "id":"34",
             "name":"Onion Anchovy Galette",
@@ -601,7 +588,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/38-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"34.html",        },
         {   
           "id":"35",
             "name":"Radish salad With Anchovy side dish",
@@ -609,7 +596,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/39-556x370.jpg",
             "description":"" ,
-            "url":"",        
+            "url":"35.html",        
           },
         {   
           "id":"36",
@@ -618,7 +605,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/40-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"36.html",        },
         {   
           "id":"37",
             "name":"Anchovy & Italian Parsley Deviled Eggs",
@@ -626,7 +613,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/41-556x370.jpg",
             "description":"" ,
-            "url":"",        },
+            "url":"37.html",        },
         {   
           "id":"38",
             "name":"Grilled Mozzarella Sandwich With Anchovy-olive Tapenade",
@@ -634,7 +621,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/43-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"38.html",
         },
         {   
           "id":"39",
@@ -643,7 +630,7 @@ var data = {
             "style":"breakfast",
             "picture":"https://spoonacular.com/recipeImages/44-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"39.html",
         },
         {   
           "id":"40",
@@ -652,7 +639,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/45-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"40.html",
         },
         {
             "id":"41",
@@ -661,7 +648,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/46-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"41.html",
         },
 		{
             "id":"42",
@@ -670,7 +657,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/47-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"42.html",
         },
         {   
             "id":"43",
@@ -679,7 +666,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/48-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"43.html",
         },
         {   
           "id":"44",
@@ -688,7 +675,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/49-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"44.html",
         },
         {   
           "id":"45",
@@ -697,7 +684,7 @@ var data = {
             "style":"breakfast",
             "picture":"https://spoonacular.com/recipeImages/50-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"45.html",
         },
         {   
           "id":"46",
@@ -706,7 +693,7 @@ var data = {
             "style":"lunch",
             "picture":"https://spoonacular.com/recipeImages/51-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"46.html",
         },
         {   
           "id":"47",
@@ -715,7 +702,7 @@ var data = {
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/52-556x370.jpg",
             "description":"" ,
-            "url":"",
+            "url":"47.html",
         },
         {   
           "id":"48",
@@ -723,7 +710,7 @@ var data = {
             "type":"nonveg",
             "style":"dinner",
             "description":"" ,
-            "url":"",
+            "url":"48.html",
             "picture":"https://spoonacular.com/recipeImages/53-556x370.jpg",
          
         },
@@ -733,7 +720,7 @@ var data = {
             "type":"nonveg",
             "style":"lunch",
             "description":"" ,
-            "url":"",            
+            "url":"49.html",            
             "picture":"https://spoonacular.com/recipeImages/54-556x370.jpg",
             
         },
@@ -743,7 +730,7 @@ var data = {
             "type":"nonveg",
             "style":"dinner",
             "description":"" ,
-            "url":"",
+            "url":"50.html",
             "picture":"https://spoonacular.com/recipeImages/55-556x370.jpg",
             
         },
@@ -1183,4 +1170,3 @@ var data = {
 
 </body>
 </html>
-{% endblock %}
