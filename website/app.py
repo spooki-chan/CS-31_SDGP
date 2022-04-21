@@ -99,6 +99,10 @@ def signup():
 def dashboard():
     return render_template('dashboard.html', name=current_user.username)
 
+@app.route('/Recipe1')
+def recipe1():
+    return render_template('1.html')
+
 @app.route('/logout')
 @login_required
 def logout():
