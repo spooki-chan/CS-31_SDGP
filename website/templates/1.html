@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipe Card Food</title>
+
+
     
-    
-    <script src="{{url_for('static', filename='Script.js')}}"></script>
 
     <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
 
@@ -18,24 +18,25 @@
 
 <body>
     <nav class="topnav" id="myTopnav">
-        <a href="" >logo</a>
+        <a href="">logo</a>
         <a href="">Home</a>
         <a href="">Search</a>
         <a href="">Sign Up</a>
         <a href="">Login</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-          <i class="fa fa-bars"></i>
+            <i class="fa fa-bars"></i>
         </a>
-      </nav>
-      
+    </nav>
+
     <div class="container">
-        <img src="https://spoonacular.com/recipeImages/1-556x370.jpg"
-            alt="Pancake" />
+        <img src="https://spoonacular.com/recipeImages/1-556x370.jpg" alt="Pancake" />
         <div class="container__text">
             <h1>Fried Anchovies with Sage</h1>
-            
+
             <p>
-                Crispy Fried Sage Leaves are sandwiched together with anchovy fillets and dipped in a super simple batter. They're the perfect mix of crispy, savoury and salty and make a simple yet elegant appetizer or snack that goes perfectly with a cocktail or glass of bubbly.
+                Crispy Fried Sage Leaves are sandwiched together with anchovy fillets and dipped in a super simple
+                batter. They're the perfect mix of crispy, savoury and salty and make a simple yet elegant appetizer or
+                snack that goes perfectly with a cocktail or glass of bubbly.
             </p>
             <div class="container__text__timing">
                 <div class="container__text__timing_time">
@@ -52,11 +53,43 @@
                 </div>
             </div>
             <p id="1" class="Fried Anchovies with Sage">
-                <button class="btn">Add to Favourite <i class="fa fa-arrow-right"></i></button>
-               </p>
-           
+                <button class="btn" id="addFavoirite">Add to Favourite <i class="fa fa-arrow-right"></i></button>
+            </p>
+
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // function myFunction() {
+            $("#addFavoirite").on("click", function () {
+                $(this).attr('disabled', true);
+                var userId = $(this).closest("p").attr("id");
+                var title = $(this).closest("p").attr("class");
+                console.log(userId);
+                console.log(title);
+
+                $.ajax({
+                    url: "http://localhost/api/users/me",
+                    type: "POST",
+                    data: {
+                        userId,
+                        title
+                    },
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    success: function (response) {
+                        recipeDetails = response;
+                    }
+                });
+            });
+            // }
+
+        });
+
+    </script>
 </body>
 
 </html>
