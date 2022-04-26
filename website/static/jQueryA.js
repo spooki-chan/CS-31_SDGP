@@ -73,7 +73,7 @@ $(function () {
 
 
 			alert("hello");
-			var test = $(this).closest("p").attr("class");
+			var test =recipename ;
 			console.log(test);
 
 
