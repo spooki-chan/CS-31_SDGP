@@ -97,11 +97,11 @@ def signup():
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
-    return render_template('dashboard.html', name=current_user.username)
+    return render_template('Search Page.html', name=current_user.username)
 
-@app.route('/Recipe1')
-def recipe1():
-    return render_template('1.html')
+# @app.route('/Recipe1')
+# def recipe1():
+#     return render_template('1.html')
 
 @app.route('/logout')
 @login_required
@@ -127,25 +127,6 @@ def hybrid():
     temp_df = temp_df.sort_values('est',ascending=False)
     return temp_df.head(10).to_json(orient='records')
     
-    # recipes = df.iloc[recipe_indices][['title','ingredients','id','recipeId','image']]
-
-    # recipes['est'] = recipes['recipeId'].apply(lambda x: svd.predict(userId, x).est)
-
-    # recipes = recipes.sort_values('est', ascending=False)
-    # return jsonify(recipes.head(10)) 
-    # temp_df['est'] = temp_df['recipeId'].apply(lambda x: svd.predict(userId, x).est)
- #   temp_df = temp_df.head(10)
-  #  result = temp_df.to_json(orient="records")
-   # parsed = json.loads(result)
-   
-    # return jsonify(message="My name is " + title + " and I am " + str(userId) + " years old")
-
-# def hybrid(userId,title):
-    # title = request.args.get('title')
-    # userId = int(request.args.get('userId'))
-    # return jsonify(message="My name is " + userId + " and I am " + title + " years old")
-    
-
 
 if __name__ == '__main__':
     app.run(debug=True)
