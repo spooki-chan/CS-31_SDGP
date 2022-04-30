@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Card Food</title>
+
+
+    
+
+    <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
+</head>
+
+<body>
+    <nav class="topnav" id="myTopnav">
+        <a href="">logo</a>
+        <a href="">Home</a>
+        <a href="">Search</a>
+        <a href="">Sign Up</a>
+        <a href="">Login</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </nav>
+
+    <div class="container">
+        <img src="https://spoonacular.com/recipeImages/1-556x370.jpg" alt="Pancake" />
+        <div class="container__text">
+            <h1>Fried Anchovies with Sage</h1>
+
+            <p>
+                Crispy Fried Sage Leaves are sandwiched together with anchovy fillets and dipped in a super simple
+                batter. They're the perfect mix of crispy, savoury and salty and make a simple yet elegant appetizer or
+                snack that goes perfectly with a cocktail or glass of bubbly.
+            </p>
+            <div class="container__text__timing">
+                <div class="container__text__timing_time">
+                    <h2>Calorie</h2>
+                    <p>125</p>
+                </div>
+                <div class="container__text__timing_time">
+                    <h2>Meal Type</h2>
+                    <p>nonveg</p>
+                </div>
+                <div class="container__text__timing_time">
+                    <h2>Meal Time</h2>
+                    <p>Dinner</p>
+                </div>
+            </div>
+            <p id="1" class="Pan-fried Butterfish">
+                <button class="btn" id="addFavoirite">Add to Favourite <i class="fa fa-arrow-right"></i></button>
+            </p>
+
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // function myFunction() {
+            $("#addFavoirite").on("click", function () {
+                $(this).attr('disabled', true);
+                var userId = $(this).closest("p").attr("id");
+                var title = $(this).closest("p").attr("class");
+                console.log(userId);
+                console.log(title);
+
+                $.ajax({
+                    url: "http://127.0.0.1:5000/hybrid",
+                    type: "GET",
+                    data: {
+                        userId,
+                        title
+                    },
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    success: function (response) {
+                        recipeDetails = response;
+                        console.log('aaaa');
+                        console.log(recipeDetails);
+                        console.log('bbbb');
+                    }
+                });
+            });
+            // }
+
+        });
+
+    </script>
+</body>
+
+</html>

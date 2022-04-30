@@ -1,0 +1,995 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='main.css')}}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script src="{{url_for('static', filename='jQueryA.js')}}"></script>
+
+
+<script src="{{url_for('static', filename='jquery-ui.js')}}"></script>
+
+<link href="{{url_for('static', filename='jquery-ui.css')}}" rel="stylesheet">
+
+<link href="http://code.jquery.com/ui/1.13.0/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cookie&family=Dongle&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">DiaCooky</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">DiaCooky</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">App</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+<div class="container">
+  <h1 class="page-header">Welcome, {{ name }}</h1>
+    <div class="calorierange">
+    <p class="box">  
+        <h3>Calorie Range</h3>
+        <input type="text" id="amount" readonly class="goldSliderText" >
+        </p></div>
+        <div id="slider-range"></div>
+
+ 
+ 
+ <div class="stylemenu">
+ <h3>Choose a Style:</h3>
+   <select name="style" id="style">
+     <option value="breakfast">Breakfast</option>
+     <option value="lunch">Lunch</option>
+     <option value="dinner">Dinner</option>
+     <option value="Any" selected>Any</option>
+   </select>
+</div>
+
+<div class="typemenu">
+   <h3>Choose the Veg or Non Veg:</h3>
+   <select name="type" id="type">
+     <option value="veg">Vegetarian</option>
+     <option value="nonveg">Non-Vegetarian</option>
+     <option value="Any" selected>Any</option>
+     
+   </select>
+</div>
+
+</div>
+   
+
+     
+   <br><br>
+   <div class="searchbtn">
+    <button id="Search">search..</button>
+   </div>
+  
+
+
+ <div id="Placeholder"></div>
+<div class="btn">
+    <button class="viewFavourites">View Favourites</button>
+    <button class="clearFavourites">Clear All</button>
+</div>
+ 
+
+ <div id="Placeholder2"></div>
+
+<script>
+
+var data = { 
+	"recipes": [
+  {
+            "id":"1",
+            "name":"Fried Anchovies with Sage",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/1-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+		{
+            "id":"2",
+            "name":"Anchovies Appetizer With Breadcrumbs & Scallions",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/2-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+            "id":"3",
+            "name":"Carrots, Cauliflower And Anchovies.",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/3-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"4",
+            "name":"Anchovies Appetizer With Breadcrumbs & ScallionBap Story: Stir Fried Anchovies (Myulchi Bokkeum).",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/4-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"5",
+            "name":"Bread, Butter And Anchovies",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/5-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"6",
+            "name":"Fried Anchovies",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/6-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"7",
+            "name":"Tomato & Anchovies With Bread Crumbs, Basil & Red Onion   Recip",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/7-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"8",
+            "name":"Marinated Fresh Anchovies: Alici Marinate",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/9-556x370.jpeg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"9",
+            "name":"Marinated Boquerones",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/10-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"10",
+            "name":"Spaghetti With Walnuts And Anchovies",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/11-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {
+            "id":"11",
+            "name":"Roasted Peppers with Boquerones",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/12-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+		{
+            "id":"12",
+            "name":"Anchovies, Tomatoes And Green Beans Couscous",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/13-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+            "id":"13",
+            "name":"Sliced Baguette With Radishes And Anchovy Butter",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/16-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"14",
+            "name":"Savory Slow Roasted Tomatoes with Filet of Anchovy",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/17-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"15",
+            "name":"Anchovy Vinaigrette",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/18-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"16",
+            "name":"No-knead Fennel & Anchovy Pizza",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/19-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"17",
+            "name":"Pan-roasted East Coast Skate, Anchovy And Broccoli Pickle",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/20-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"18",
+            "name":"Anchovies, Beans And Rocket",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/21-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"19",
+            "name":"Anchovy And Onion Tart",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/22-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"20",
+            "name":"Cauliflower, Anchovies and Tomatoes",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/23-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {
+            "id":"21",
+            "name":"Anchovy Fries with Smoked Paprika Aioli",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/25-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+		{
+            "id":"22",
+            "name":"Sliced Baguette With Radishes And Anchovy Butter",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/26-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+            "id":"23",
+            "name":"Cook the Book: Braided Beef with Anchovies and Olives",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/27-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"24",
+            "name":"Potato salad With Green Goddess Dressing.",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/28-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"25",
+            "name":"Skate, Chicory, and Anchovy",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/29-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"26",
+            "name":"Raw Mustard Greens salad With GruyÃ¨re And Anchovy Croutons",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/30-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"27",
+            "name":"Caramelized Onion And Fresh Anchovy Tart",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/31-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"28",
+            "name":"Anchovy Crostini With Onion-and-raisin Relish",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/32-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"29",
+            "name":"Radish salad Lugano",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/33-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"30",
+            "name":"Cardoons With Anchovy-garlic side dish",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/34-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {
+            "id":"31",
+            "name":"Anchovy and Herb Marinade",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/35-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+		{
+            "id":"32",
+            "name":"Beet Greens With Anchovies",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/36-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+            "id":"33",
+            "name":"Roasted Cauliflower With Anchovy Bread Crumbs",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/37-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"34",
+            "name":"Onion Anchovy Galette",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/38-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"35",
+            "name":"Radish salad With Anchovy side dish",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/39-556x370.jpg",
+            "description":"" ,
+            "url":"",        
+          },
+        {   
+          "id":"36",
+            "name":"Pizza With Anchovies, Red Onion, And Oregano",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/40-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"37",
+            "name":"Anchovy & Italian Parsley Deviled Eggs",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/41-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"38",
+            "name":"Grilled Mozzarella Sandwich With Anchovy-olive Tapenade",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/43-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"39",
+            "name":"Pressed Summer Sandwich with Eggs and Anchovies",
+            "type":"veg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/44-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"40",
+            "name":"Chicory In Anchovy side dish",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/45-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {
+            "id":"41",
+            "name":"Mustard Greens, Shrimp, And Anchovy Pasta",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/46-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+		{
+            "id":"42",
+            "name":"Orecchiette with Cauliflower, Anchovies and Pistachios",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/47-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+            "id":"43",
+            "name":"Roasted Cauliflower With Anchovy Vinaigrette",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/48-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"44",
+            "name":"Roasted Red Peppers With Anchovies And Olive Oil",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/49-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"45",
+            "name":"Tomato And Boquerones salad With Garlicky Breadcrumbs",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/50-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"46",
+            "name":"Hard-Cooked Eggs with Crisp Anchovy Crumbs",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/51-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"47",
+            "name":"Acciughe Con Salsa Verde (anchovies In Green side dish)",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/52-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"48",
+            "name":"California Artichokes With Anchovy Mayonnaise",
+            "type":"nonveg",
+            "style":"dinner",
+            "description":"" ,
+            "url":"",
+            "picture":"https://spoonacular.com/recipeImages/53-556x370.jpg",
+         
+        },
+        {   
+          "id":"49",
+            "name":"Anchovy, Little Gem, And Tomato salad",
+            "type":"nonveg",
+            "style":"lunch",
+            "description":"" ,
+            "url":"",            
+            "picture":"https://spoonacular.com/recipeImages/54-556x370.jpg",
+            
+        },
+        {   
+          "id":"50",
+            "name":"Anchovy and Piquillo Pepper Bruschetta",
+            "type":"nonveg",
+            "style":"dinner",
+            "description":"" ,
+            "url":"",
+            "picture":"https://spoonacular.com/recipeImages/55-556x370.jpg",
+            
+        },
+	{
+            "id":"51",
+            "name":"Tomato-and-Anchovy salad with Garlic Cream",
+            "type":"veg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/56-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+		{
+            "id":"52",
+            "name":"Port-Marinated Pork with Prunes and Anchovies",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/57-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+            "id":"53",
+            "name":"Roasted Peppers With Anchovies",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/58-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"54",
+            "name":"Pasta With Tonnato And Tomato",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/59-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"55",
+            "name":"Grilled Broccoli with Anchovy Dressing",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/60-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"56",
+            "name":"Balsamic, Caper, And Anchovy Marinade",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/61-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"57",
+            "name":"Egg-Free Avocado Caesar salad",
+            "type":"veg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/62-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"58",
+            "name":"Broccoli & Burrata",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/63-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"59",
+            "name":"Sauted Shrimp with Green Olives,Scallions and Anchovies",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/64-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"60",
+            "name":"Pasta Puttanesca",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/65-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {
+            "id":"61",
+            "name":"Egg and Anchovy Crostini",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/66-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+		{
+            "id":"62",
+            "name":"Greek salad Skewers with Anchovy Aioli",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/67-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+            "id":"63",
+            "name":"Spaghetti with Anchovies and Breadcrumbs",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/68-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"64",
+            "name":"salad with Parmigiano-Reggiano and anchovy dressing",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/69-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"65",
+            "name":"Anchovy and olive bruschetta",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/70-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"66",
+            "name":"Fried Green Tomatoes with Anchovy and Lemon",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/71-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"67",
+            "name":"Chicken Caesar salad",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/72-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"68",
+            "name":"Tomatoes With Anchovy Dressing",
+            "type":"veg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/73-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"69",
+            "name":"Salsa Verde",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/74-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"70",
+            "name":"Spaghetti with Fried Capers and Anchovies",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/75-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {
+            "id":"71",
+            "name":"White Anchovy and Crisp Pita Bread salad",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/76-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+		{
+            "id":"72",
+            "name":"Burrata salad",
+            "type":"veg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/77-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+            "id":"73",
+            "name":"Pickled Pepper, Anchovy & Egg Sandwich On Rye",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/78-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"74",
+            "name":"Cook the Book Artichokes Basted with Anchovy Butter",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/79-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"75",
+            "name":"Sauted Radicchio",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/80-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"76",
+            "name":"Oven Puttanesca",
+            "type":"veg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/81-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"77",
+            "name":"Roasted Brussels Sprouts With Capers, Walnuts And Anchovies",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/82-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"78",
+            "name":"Labneh With Chilli And Anchovy",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/83-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"79",
+            "name":"Lightened-up Chicken Caesar Platter",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/84-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"80",
+            "name":"Pasta With Anchovy Bread Crumb Topping",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/85-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {
+            "id":"81",
+            "name":"Shrimp and Pasta Puttanesca",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/86-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+		{
+            "id":"82",
+            "name":"Winter Greens, Asiago, and Anchovy Pizza",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/87-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+            "id":"83",
+            "name":"Pappardelle with Zucchini, Anchovies and Mint",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/88-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"84",
+            "name":"Wheat Noodles with Anchovy side dish Bigoli en Salsa",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/89-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"85",
+            "name":"Tuna Caper Dip",
+            "type":"nonveg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/90-556x370.jpg",
+            "description":"" ,
+            "url":"",        
+          },
+        {   
+          "id":"86",
+            "name":"Puttanesca Baked Cod",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/91-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"87",
+            "name":"Alex's Anchovy Bucatini",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/92-556x370.jpg",
+            "description":"" ,
+            "url":"",        },
+        {   
+          "id":"88",
+            "name":"Onion, Anchovy And Olive Tart",
+            "type":"nonveg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/94-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"89",
+            "name":"Springtime Asparagus Pizza",
+            "type":"veg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/95-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"90",
+            "name":"Anchovy and Roasted-Pepper salad with Goat Cheese",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/96-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {
+            "id":"91",
+            "name":"Farmers Pasta",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/97-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+		{
+            "id":"92",
+            "name":"Green Caesar salad",
+            "type":"nonveg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/98-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+            "id":"93",
+            "name":"Pan-Seared Skirt Steak with Anchovies and Lime",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/100-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"94",
+            "name":"Roasted Tomato Spaghetti",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/101-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"95",
+            "name":"Crispy Potato salad With Chimichurri side dish",
+            "type":"veg",
+            "style":"breakfast",
+            "picture":"https://spoonacular.com/recipeImages/102-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"96",
+            "name":"Balsamic, Caper, And Anchovy Marinade",
+            "type":"veg",
+            "style":"lunch",
+            "picture":"https://spoonacular.com/recipeImages/103-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"97",
+            "name":"Broccolini With Anchovies, Currants &toasted Breadcrumbs",
+            "type":"veg",
+            "style":"dinner",
+            "picture":"https://spoonacular.com/recipeImages/104-556x370.jpg",
+            "description":"" ,
+            "url":"",
+        },
+        {   
+          "id":"98",
+            "name":"Radish And Escarole salad With Anchovy Vinaigrette",
+            "type":"veg",
+            "style":"dinner",
+            "description":"" ,
+            "url":"",
+            "picture":"https://spoonacular.com/recipeImages/105-556x370.jpg",
+         
+        },
+        {   
+          "id":"99",
+            "name":"Bagna Cauda (piedmontese Warm Garlic-anchovy Dip)",
+            "type":"veg",
+            "style":"lunch",
+            "description":"" ,
+            "url":"",            
+            "picture":"https://spoonacular.com/recipeImages/106-556x370.jpg",
+            
+        },
+        {   
+          "id":"100",
+            "name":"The Perfect Caesar salad",
+            "type":"nonveg",
+            "style":"breakfast",
+            "description":"" ,
+            "url":"",
+            "picture":"https://spoonacular.com/recipeImages/107-556x370.jpg",
+            
+        },
+      ]}
+</script>
+{% endblock %}
