@@ -52,7 +52,7 @@
                     <p>Dinner</p>
                 </div>
             </div>
-            <p id="1" class="Fried Anchovies with Sage">
+            <p id="1" class="Pan-fried Butterfish">
                 <button class="btn" id="addFavoirite">Add to Favourite <i class="fa fa-arrow-right"></i></button>
             </p>
 
@@ -71,8 +71,8 @@
                 console.log(title);
 
                 $.ajax({
-                    url: "http://localhost/api/users/me",
-                    type: "POST",
+                    url: "http://127.0.0.1:5000/hybrid",
+                    type: "GET",
                     data: {
                         userId,
                         title
@@ -82,6 +82,9 @@
                     },
                     success: function (response) {
                         recipeDetails = response;
+                        console.log('aaaa');
+                        console.log(recipeDetails);
+                        console.log('bbbb');
                     }
                 });
             });
