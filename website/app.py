@@ -121,7 +121,7 @@ def hybrid():
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:26]
     recipe_indices = [i[0] for i in sim_scores]
-    temp_df = df.iloc[recipe_indices][['title','ingredients','id','recipeId','image']]
+    temp_df = df.iloc[recipe_indices][['title','ingredients','id','recipeId','image','calories']]
     temp_df['est'] = temp_df['recipeId'].apply(lambda x: svd.predict(userId, x).est)
     
     temp_df = temp_df.sort_values('est',ascending=False)
