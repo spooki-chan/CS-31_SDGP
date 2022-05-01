@@ -72,9 +72,30 @@ $(function () {
 		$("#addFavoirite").on("click", function () {
 
 
-			alert("hello");
-			var test = $(this).closest("p").attr("class");
-			console.log(test);
+			// alert("hello");
+			var title =recipename ;
+			console.log(title);
+
+			let userId =Math.floor((Math.random() * 12) + 1);
+			console.log(userId);
+
+			$.ajax({
+				url: "http://127.0.0.1:5000/hybrid",
+				type: "GET",
+				data: {
+					userId,
+					title
+				},
+				headers: {
+					'Accept': 'application/json',
+				},
+				success: function (response) {
+					recipeDetails = response;
+					console.log('aaaa');
+					console.log(recipeDetails);
+					console.log('bbbb');
+				}
+			});
 
 
 

@@ -11,6 +11,8 @@
 
 <script src="{{url_for('static', filename='jquery-ui.js')}}"></script>
 
+<script type="text/javascript" src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
 <link href="{{url_for('static', filename='jquery-ui.css')}}" rel="stylesheet">
 
 <link href="http://code.jquery.com/ui/1.13.0/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
@@ -18,6 +20,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Dongle&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
 <style>
     body{
@@ -284,7 +288,7 @@ body {
 <div class="stylemenu">
 <h3>Choose a Recipe:</h3>
    <select name="recipe" id="recipe">
-     <option value="FriedAnchovieswithSage">Fried Anchovies with Sage</option>
+     <option value="Fried Anchovies with Sage">Fried Anchovies with Sage</option>
      <option value="Anchovies Appetizer With Breadcrumbs & Scallions">Anchovies Appetizer With Breadcrumbs & Scallions</option>
      <option value="Carrots, Cauliflower And Anchovies.">Carrots, Cauliflower And Anchovies.</option>
      <option value="Anchovies Appetizer With Breadcrumbs & ScallionBap Story: Stir Fried Anchovies (Myulchi Bokkeum)." >Anchovies Appetizer With Breadcrumbs & ScallionBap Story: Stir Fried Anchovies (Myulchi Bokkeum).</option>
@@ -425,13 +429,34 @@ body {
 
  <div id="Placeholder2"></div>
 
+ <div class="card-header">
+  <i class="fas fa-table mr-1"></i>
+  Recipe
+</div>
+<div class="card-body">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped" width="100%" cellspacing="0" id="patientTable" class="display">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Ingredients</th>
+          <th>id</th>
+          <th>Recipe Id</th>
+          <th>Calories</th>
+          <th>image</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
 <script>
 
 var data = { 
 	"recipes": [
   {
             "id":"1",
-            "name":"FriedAnchovieswithSage",
+            "name":"Fried Anchovies with Sage",
             "type":"nonveg",
             "style":"dinner",
             "picture":"https://spoonacular.com/recipeImages/1-556x370.jpg",
@@ -1390,7 +1415,11 @@ var data = {
 ]}
 
 
-		
+		$("#addFavoirite").on("click", function () {
+
+			alert("hi");
+
+		});
 	 
 
 
