@@ -70,7 +70,7 @@ $(function () {
 		output += "</ul>";
 		document.getElementById("Placeholder").innerHTML = output;
 		$("#addFavoirite").on("click", function () {
-
+			
 
 			// alert("hello");
 			var title =recipename ;
@@ -92,7 +92,10 @@ $(function () {
 				success: function (response) {
 					recipeDetails = response;
 					console.log('aaaa');
-					console.log(recipeDetails);
+					console.log(recipeDetails.split(","));
+					document.getElementById("Placeholder3").innerHTML = recipeDetails;
+					console.log(recipeDetails[1]);
+					console.log(recipeDetails.length);
 					console.log('bbbb');
 				}
 			});
