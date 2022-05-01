@@ -38,14 +38,14 @@
 
 
 ## Setup
-- ...
+- `to be explained`
 
 
 ## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
 
-`write-your-code-here`
+Should provide various use cases and code examples here.
+
+`to-be-edited`
 
 
 ## Project Status
