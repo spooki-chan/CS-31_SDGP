@@ -32,6 +32,7 @@
 
 - Users should be able to view recipes to their likings.
 - After viewing the recipes, the user should have the ability to show their response by liking, disliking the content.
+- Recipies should be reccomended according to the users mood.
 
 
 
@@ -40,6 +41,7 @@ Closed.
 
 
 ## Room for Improvement
+- This exact project can be completed with all the front end fatures to produce a full pledged web application.
 - For further improvement a funtion can be developed to detect the person's feelings and the perceptions about this application which will automatically save those things within the app and when the patient logged into this app that person can get a deep and through understanding about his/ her past records the development up to now. This leading to predicting the possible outcomes such as health conditions or reccomendation of updated diet plans in real time.
 
 
