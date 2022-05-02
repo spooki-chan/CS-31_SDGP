@@ -6,8 +6,6 @@
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Setup](#setup)
-* [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
@@ -37,19 +35,8 @@
 
 
 
-## Setup
-- `to be explained`
-
-
-## Usage
-
-Should provide various use cases and code examples here.
-
-`to-be-edited`
-
-
 ## Project Status
-Completed.
+Closed.
 
 
 ## Room for Improvement
